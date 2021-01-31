@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 from math import floor
 from segment_graph import *
+from disjoint_set import *
 from sklearn.decomposition import PCA
 
 def calcRgbHistFeature(image, bin_num, mask = None):
