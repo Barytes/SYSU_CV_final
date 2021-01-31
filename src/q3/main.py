@@ -1,8 +1,12 @@
 import os
 import numpy as np 
 import cv2
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt  
 from segment_graph import *
 from data_generation import *
+from sklearn.cluster import KMeans  
+
 
 
 def suppress_qt_warnings():
@@ -11,17 +15,34 @@ def suppress_qt_warnings():
     os.environ["QT_SCREEN_SCALE_FACTORS"] = "1"
     os.environ["QT_SCALE_FACTOR"] = "1"
 
+def calcPatch(kp, patch_size, img):
+    return None
+
 if __name__ == '__main__':  
     im_path, test_im_path = "../../data/train/imgs/", "../../data/test/imgs/"
     gt_path, test_gt_path = "../../data/train/gt/", "../../data/test/gt/"
     gt_seg_path, test_gt_seg_path = "../../data/train/seg_gt/", "../../data/test/seg_gt/"
-    img = cv2.imread(test_im_path+"57.png") 
 
-    rows,cols = img.shape[:2]
-    gray= cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    img = cv2.imread(test_im_path+"57.png", cv2.IMREAD_GRAYSCALE) 
+    patch_size, hist_bin_num = 16, 4
+    rgbfmat = []
 
     sift=cv2.xfeatures2d.SIFT_create()
- 
-    kp, des = sift.detectAndCompute(gray, None) 
-    print(kp.shape)
-    print(des.shape)
+    kps, des = sift.detectAndCompute(img, None) 
+    
+    for kp in kps:
+        print(kp.pt[0], kp.pt[1])
+        patch = calcPatch(kp, patch_size, img)
+        rgbfvec = calcRgbHistFeature(patch, hist_bin_num)
+        rgbfmat.append(rgbfvec)
+
+    pca = PCA(n_components=10)
+    reduced_des = pca.fit_transform(des)
+    rgbfmat = np.array(rgbfmat)
+    fmat = np.concatenate((reduced_des, rgbfmat), axis=1)
+
+    kmeans=KMeans(n_clusters=3)
+    kmeans.fit(fmat)
+    for i,l in enumerate(kmeans.labels_):  
+        plt.plot(x1[i],x2[i],color=colors[l],marker=markers[l],ls='None')  
+    plt.show() 
