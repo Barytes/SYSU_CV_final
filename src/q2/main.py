@@ -33,8 +33,7 @@ def classify():
     train_file_path, test_file_path = "../../data/train/rgb_feature_data/", "../../data/test/rgb_feature_data/"
     x_train, y_train = np.load(train_file_path+"x_train.npy"), np.load(train_file_path+"y_train.npy")
     x_test, y_test = np.load(test_file_path+"x_test.npy"), np.load(test_file_path+"y_test.npy")
-    print(x_train[0:20,0])
-    print(y_train[0:20])
+
     print("data loaded...\nstart classifying...")
     rfc = RandomForestClassifier()
     scores = cross_val_score(rfc, x_train, y_train)
