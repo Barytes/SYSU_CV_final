@@ -34,6 +34,7 @@ def reshapeMaskedImg(image, mask):
         for c in range(w):
             if mask[r,c] == 255:
                 ret[i] = image[r,c]
+                i += 1
     return ret
 
 def comp2Mask(comp, djs, ht):
@@ -65,7 +66,7 @@ def calcLabelVec(ht, comps, gt_seg):
             y_train.append(0)
     return y_train
 
-def make_blobs(im_path, gt_path, gt_seg_path):
+def make_blobs(im_path, gt_seg_path):
     pic_list = os.listdir(im_path)
     k, sigma, min, bin_num, n_features = 80, 0.8, 20, 8, 50
     pca = PCA(n_components=n_features)
@@ -73,8 +74,8 @@ def make_blobs(im_path, gt_path, gt_seg_path):
 
     for (i,pic) in enumerate(pic_list):
         print(i,"/", len(pic_list))
-        img, gt, gt_seg = cv2.imread(im_path+pic), cv2.imread(gt_path+pic), cv2.imread(gt_seg_path+pic)
-        gt, gt_seg = cv2.cvtColor(gt,cv2.COLOR_BGR2GRAY), cv2.cvtColor(gt_seg,cv2.COLOR_BGR2GRAY)
+        img, gt_seg = cv2.imread(im_path+pic), cv2.imread(gt_seg_path+pic)
+        gt_seg = cv2.cvtColor(gt_seg,cv2.COLOR_BGR2GRAY)
 
         djs = segment(img, sigma, k, min)
         ht = vp_hash_table(img.shape[0], img.shape[1])

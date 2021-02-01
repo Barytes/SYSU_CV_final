@@ -19,10 +19,10 @@ def generate_data_file():
     gt_seg_path, test_gt_seg_path = "../../data/train/seg_gt/", "../../data/test/seg_gt/"
     train_file_path, test_file_path = "../../data/train/rgb_feature_data/", "../../data/test/rgb_feature_data/"
     print("training data making...")
-    x_train, y_train = make_blobs(im_path, gt_path, gt_seg_path)
+    x_train, y_train = make_blobs(im_path, gt_seg_path)
     print("train data done")
     print("test data making...")
-    x_test, y_test = make_blobs(test_im_path, test_gt_path, test_gt_seg_path)
+    x_test, y_test = make_blobs(test_im_path, test_gt_seg_path)
     print("test data done")
     np.save(train_file_path+"x_train.npy",x_train)
     np.save(train_file_path+"y_train.npy",y_train)
@@ -33,7 +33,8 @@ def classify():
     train_file_path, test_file_path = "../../data/train/rgb_feature_data/", "../../data/test/rgb_feature_data/"
     x_train, y_train = np.load(train_file_path+"x_train.npy"), np.load(train_file_path+"y_train.npy")
     x_test, y_test = np.load(test_file_path+"x_test.npy"), np.load(test_file_path+"y_test.npy")
-    
+    print(x_train[0:20,0])
+    print(y_train[0:20])
     print("data loaded...\nstart classifying...")
     rfc = RandomForestClassifier()
     scores = cross_val_score(rfc, x_train, y_train)
