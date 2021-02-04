@@ -42,22 +42,6 @@ def segment(in_image, sigma, k, min_size):
             u.join(a, b)
 
     num_cc = u.num_sets()
-    # output = random_coloring(u)
-
-    # elapsed_time = time.time() - start_time
-    # print(
-    #     "Execution time: " + str(int(elapsed_time / 60)) + " minute(s) and " + str(
-    #         int(elapsed_time % 60)) + " seconds")
-
-    # displaying the result
-    # fig = plt.figure()
-    # a = fig.add_subplot(1, 2, 1)
-    # plt.imshow(in_image)
-    # a.set_title('Original Image')
-    # a = fig.add_subplot(1, 2, 2)
-    # plt.imshow(output)
-    # a.set_title('Segmented Image')
-    # plt.show()
     return num_cc, u
 
 def build_graph(width, height, red, green, blue):
@@ -115,7 +99,7 @@ def select_k(sigma, min, input_path):
     suppress_qt_warnings()
     pic_list = os.listdir(input_path)
     
-    for k in range(80,84,1):
+    for k in range(80,100,1):
         cnt = 0
         for i in pic_list[0:100]:
             # Loading the image

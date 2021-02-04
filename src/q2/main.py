@@ -45,8 +45,6 @@ def classify():
     print("训练集上的准确率：", accuracy_score(y_train, y_train_predict))
     print("测试集上的准确率：", accuracy_score(y_test, y_test_predict))
 
-    
-
 if __name__ == '__main__':
     suppress_qt_warnings()
     classify()
