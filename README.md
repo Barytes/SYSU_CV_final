@@ -58,7 +58,7 @@
 
 根据题目要求，每张图需要分割为 50~100 个区域；而区域大小同设定的 k 值相关。为寻找合适的 k 值，在`main.py`的`select_k`函数中逐步尝试从 80 到 100 的 k 值设置，对每个 k 值进行 100 次分割，统计每个 k 值中不符合要求的区域数量。根据统计结果， k = 80 时不符护要求的区域数量最小，故随后实验中 k 取 80。
 
-![k_selection_1](C:\Users\Barytes\Desktop\CV_final\report\imgs\k_selection_1.png)![k_selection_3](C:\Users\Barytes\Desktop\CV_final\report\imgs\k_selection_3.png)
+![k_selection_1](https://i.loli.net/2021/02/06/yefsoDMh8KvkjXd.png)![k_selection_3](https://i.loli.net/2021/02/06/8gGVHc1hQv9CAYO.png)
 
 #### 1.2.3 区域标记
 
@@ -66,7 +66,7 @@
 
 以57.png为例，其gt和gt_seg如下所示：
 
-![57](C:\Users\Barytes\Desktop\CV_final\data\test\gt\57.png)![57](C:\Users\Barytes\Desktop\CV_final\data\test\seg_gt\57.png)
+![57](https://i.loli.net/2021/02/06/qHMVxdhElTenbN1.png)![57](https://i.loli.net/2021/02/06/PUR29e7KGbJnIQX.png)
 
 #### 1.2.4 计算iou
 
@@ -135,7 +135,7 @@ pca降维使用了scikit-learn库中的PCA方法，设置n_components = 50；对
 
 ### 2.3 结果
 
-![q2_classify](C:\Users\Barytes\Desktop\CV_final\report\imgs\q2_classify.png)
+![q2_classify](https://i.loli.net/2021/02/06/JMRzE57ofmDyBpb.png)
 
 ## 题目3
 
@@ -165,6 +165,6 @@ SIFT特征计算利用了opencv库实现的SIFT特征检测。首先将输入图
 
 聚类展示图的结果存储于`data/test/cluster_fig`中，以57.png为例：
 
-![57](C:\Users\Barytes\Desktop\CV_final\data\test\cluster_fig\57.png)
+![57](https://i.loli.net/2021/02/06/csXfQu1gzronKwe.png)
 
 最后的几个纯黑色patch是将图像补足为矩形所用。
